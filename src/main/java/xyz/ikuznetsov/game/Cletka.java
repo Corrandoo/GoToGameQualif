@@ -3,7 +3,12 @@ package xyz.ikuznetsov.game;
 public class Cletka {
 
     private int xPos, yPos, num;
-    private String type = "-";
+    private String type;
+
+    public Cletka(int num, String type) {
+        this.num = num;
+        this.type = type;
+    }
 
     public int getxPos() {
         return xPos;
@@ -37,10 +42,9 @@ public class Cletka {
         this.type = type;
     }
 
-    public int getNumberAsXY(String xy){
-        String[] str = xy.split("");
-        int x = Integer.parseInt(str[0]);
-        int y = Integer.parseInt(str[1]);
-        return (3 * (x - 1) + 1) + (y - 1);
+
+    @Override
+    public String toString() {
+        return type;
     }
 }
