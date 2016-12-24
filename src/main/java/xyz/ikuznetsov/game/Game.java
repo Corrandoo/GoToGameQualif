@@ -13,8 +13,24 @@ public class Game {
         Game game = new Game();
         Cletka[] cletkas = new Cletka[9];
 
-        game.intializeClearField(cletkas);
+        game.initializeClearField(cletkas);
         game.outGameField(cletkas);
+
+        while(true){
+            game.getChoice(cletkas);
+            game.outGameField(cletkas);
+            if(game.isGameOverAsWin(cletkas)){
+                if(game.whatTypeIsNow) {
+                    System.out.println("Игра закончена. Крестики выиграли.");
+                    break;
+                }
+                else{
+                    System.out.println("Игра закончена. Нолики выиграли.");
+                    break;
+                }
+
+            }
+        }
 
 
     }
@@ -25,7 +41,7 @@ public class Game {
         System.out.println(cletka[6] + " " + cletka[7] + " " + cletka[8]);
     }
 
-    private void intializeClearField(Cletka[] cletka){
+    private void initializeClearField(Cletka[] cletka){
         for (int i = 0; i < cletka.length; i++) {
             cletka[i] = new Cletka(i + 1, "--");
         }
@@ -51,6 +67,35 @@ public class Game {
         int x = Integer.parseInt(str[0]);
         int y = Integer.parseInt(str[1]);
         return (3 * (x - 1) + 1) + (y - 1);
+    }
+
+    private boolean isGameOverAsWin(Cletka[] cletka){
+        if(cletka[0].getType().equals(cletka[4].getType()) && cletka[4].getType().equals(cletka[8].getType()) && !(cletka[0].getType().equals("--")))
+            return true;
+        else if(cletka[2].getType().equals(cletka[4].getType()) && cletka[4].getType().equals(cletka[6].getType())&& !(cletka[2].getType().equals("--")))
+            return true;
+        else if(cletka[0].getType().equals(cletka[1].getType()) && cletka[1].getType().equals(cletka[2].getType())&& !(cletka[0].getType().equals("--")))
+            return true;
+        else if(cletka[3].getType().equals(cletka[4].getType()) && cletka[4].getType().equals(cletka[5].getType())&& !(cletka[3].getType().equals("--")))
+            return true;
+        else if(cletka[6].getType().equals(cletka[7].getType()) && cletka[7].getType().equals(cletka[8].getType())&& !(cletka[6].getType().equals("--")))
+            return true;
+        else if(cletka[0].getType().equals(cletka[3].getType()) && cletka[3].getType().equals(cletka[6].getType())&& !(cletka[0].getType().equals("--")))
+            return true;
+        else if(cletka[1].getType().equals(cletka[4].getType()) && cletka[4].getType().equals(cletka[7].getType())&& !(cletka[1].getType().equals("--")))
+            return true;
+        else if(cletka[2].getType().equals(cletka[5].getType()) && cletka[5].getType().equals(cletka[8].getType())&& !(cletka[2].getType().equals("--")))
+            return true;
+        else return false;
+    }
+
+    private boolean isGameOverAsDraw(Cletka[] cletka){
+        for (int i = 0; i < cletka.length; i++) {
+            if(cletka[i].getType().equals("--")){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
