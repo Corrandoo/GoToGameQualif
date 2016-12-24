@@ -9,10 +9,11 @@ public class Game {
     boolean whatTypeIsNow = false; // false - крестики, true - нолики
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Game game = new Game();
         Cletka[] cletkas = new Cletka[9];
 
+        game.beforeGame();
         game.initializeClearField(cletkas);
         game.outGameField(cletkas);
 
@@ -29,6 +30,10 @@ public class Game {
                     break;
                 }
 
+            }
+            if(game.isGameOverAsDraw(cletkas)){
+                System.out.println("Игра закончена. Ничья.");
+                break;
             }
         }
 
@@ -96,6 +101,16 @@ public class Game {
             }
         }
         return true;
+    }
+    private void beforeGame() throws InterruptedException {
+        System.out.println("Добро пожаловать в игру крестики нолики!");
+        Thread.sleep(500);
+        System.out.println("Позиция клетки задается следующим образом: первое число - горизонталь клетки. Второе число - вертикаль клетки.");
+        Thread.sleep(500);
+        System.out.println("Позиция вводится одним двузначным числом, каждая цифра в котором может быть от 1 до 3 включительно.");
+        Thread.sleep(500);
+        System.out.println("Игра начинается...");
+        Thread.sleep(500);
     }
 
 }
