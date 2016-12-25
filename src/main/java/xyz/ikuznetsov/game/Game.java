@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 
 public class Game {
 
-    boolean whatTypeIsNow = false; // false - крестики, true - нолики
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private boolean whatTypeIsNow = false; // false - крестики, true - нолики
+    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Game game = new Game();
@@ -48,7 +48,7 @@ public class Game {
 
     private void initializeClearField(Cletka[] cletka){
         for (int i = 0; i < cletka.length; i++) {
-            cletka[i] = new Cletka(i + 1, "--");
+            cletka[i] = new Cletka("--");
         }
     }
 
@@ -68,10 +68,16 @@ public class Game {
     }
 
     private int getNumberAsXY(String xy){
-        String[] str = xy.split("");
-        int x = Integer.parseInt(str[0]);
-        int y = Integer.parseInt(str[1]);
-        return (3 * (x - 1) + 1) + (y - 1);
+        try {
+            String[] str = xy.split("");
+            int x = Integer.parseInt(str[0]);
+            int y = Integer.parseInt(str[1]);
+            return (3 * (x - 1) + 1) + (y - 1);
+        }catch (Exception e){
+            System.out.println("Произошла ошибка. Перезапустите игру.");
+
+        }
+        return 1;
     }
 
     private boolean isGameOverAsWin(Cletka[] cletka){
